@@ -22,7 +22,12 @@ namespace CoreCodeCamp
             services.AddDbContext<CampContext>();
             services.AddScoped<ICampRepository, CampRepository>();
             services.AddAutoMapper();
-            services.AddMvc()
+            services.AddApiVersioning(x =>
+            {
+                x.DefaultApiVersion = new ApiVersion(1, 1);
+                x.ReportApiVersions = true;
+            });
+            services.AddMvc(x => x.EnableEndpointRouting = false)
               .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
